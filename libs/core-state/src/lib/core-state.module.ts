@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
-  imports: [CommonModule]
+  imports: [
+    CommonModule,
+    StoreModule.forRoot( ),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument()
+  ]
 })
 export class CoreStateModule {}

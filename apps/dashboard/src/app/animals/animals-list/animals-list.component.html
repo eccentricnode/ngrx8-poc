@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-content>
+        <h3 mat-subheader>Animals</h3>
+        <mat-list *ngIf="animals.length; else elseBlock">
+            <mat-list-item *ngFor="let animal of animals" class="mat-list-option"
+                (click)="select(animal)">
+                <h4 mat-line>{{animal.name}}</h4>
+                <span mat-line>{{animal.continent}}</span>
+                <button mat-mini-fab *ngIf="!readonly" (click)="remove(animal);$event.stopImmediatePropagation();">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+        <ng-template #elseBlock>
+            <mat-spinner mode="indeterminate"></mat-spinner>
+        </ng-template>
+    </mat-card-content>
+</mat-card>
