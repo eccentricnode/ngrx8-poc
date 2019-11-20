@@ -15,7 +15,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ngrx8-poc/core-data": ["libs/core-data/src/index.ts"],
+      "@ngrx8-poc/core-state": ["libs/core-state/src/index.ts"],
+      "@ngrx8-poc/material": ["libs/material/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
