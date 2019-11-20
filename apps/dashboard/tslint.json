@@ -1,0 +1,7 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "ngrx8Poc", "camelCase"],
+    "component-selector": [true, "element", "ngrx8-poc", "kebab-case"]
+  }
+}
