@@ -33,7 +33,7 @@ export const AnimalCreationSuccess = createAction(
 
 export const AnimalCreationFailure = createAction(
   '[Animals] Animal Create Failed',
-  props<{error: any}>()
+  props<{animal: Animal}>()
 );
 
 // Update Actions 
@@ -49,7 +49,7 @@ export const AnimalUpdatedSuccess = createAction(
 
 export const AnimalUpdatedFailure = createAction(
   '[Animals] Animal Update Failed',
-  props<{error: any}>()
+  props<{animal: Animal}>()
 );
 
 // Delete Actions
@@ -65,5 +65,5 @@ export const DeleteAnimalSuccess = createAction(
 
 export const DeleteAnimalFailure = createAction(
   '[Animals] Animal Delete Failed',
-  props<{error: any}>()
+  props<{animal: Animal}>()
   );
