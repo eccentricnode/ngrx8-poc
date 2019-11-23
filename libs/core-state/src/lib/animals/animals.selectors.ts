@@ -1,42 +1,32 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
-  ANIMALS_FEATURE_KEY,
-  State,
-  AnimalsPartialState,
+  AnimalsState,
   animalsAdapter
 } from './animals.reducer';
 
 // Lookup the 'Animals' feature state managed by NgRx
-export const getAnimalsState = createFeatureSelector<
-  AnimalsPartialState,
-  State
->(ANIMALS_FEATURE_KEY);
+export const getAnimalsState = createFeatureSelector<AnimalsState>('animals');
 
 const { selectAll, selectEntities } = animalsAdapter.getSelectors();
 
 export const getAnimalsLoaded = createSelector(
   getAnimalsState,
-  (state: State) => state.loaded
-);
-
-export const getAnimalsError = createSelector(
-  getAnimalsState,
-  (state: State) => state.error
+  (state: AnimalsState) => state.loaded
 );
 
 export const getAllAnimals = createSelector(
   getAnimalsState,
-  (state: State) => selectAll(state)
+  (state: AnimalsState) => selectAll(state)
 );
 
 export const getAnimalsEntities = createSelector(
   getAnimalsState,
-  (state: State) => selectEntities(state)
+  (state: AnimalsState) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getAnimalsState,
-  (state: State) => state.selectedId
+  (state: AnimalsState) => state.selectedAnimalId
 );
 
 export const getSelected = createSelector(

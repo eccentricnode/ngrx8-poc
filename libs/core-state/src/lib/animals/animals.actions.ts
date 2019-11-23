@@ -15,11 +15,6 @@ export const AnimalsLoadedSuccess = createAction(
   props<{ animals: Animal[]}>()
 );
 
-export const AnimalsLoadedFailure = createAction(
-  '[Animals] Animals Load Failed',
-  props<{ error: any }>()
-);
-
 // Create Actions
 export const CreateAnimal = createAction(
   '[Animals] Create New Animal',
@@ -28,11 +23,6 @@ export const CreateAnimal = createAction(
 
 export const AnimalCreationSuccess = createAction(
   '[Animals] New Animal Created',
-  props<{animal: Animal}>()
-);
-
-export const AnimalCreationFailure = createAction(
-  '[Animals] Animal Create Failed',
   props<{animal: Animal}>()
 );
 
@@ -47,23 +37,13 @@ export const AnimalUpdatedSuccess = createAction(
   props<{animal: Animal}>()
   );
 
-export const AnimalUpdatedFailure = createAction(
-  '[Animals] Animal Update Failed',
-  props<{animal: Animal}>()
-);
-
 // Delete Actions
 export const DeleteAnimal = createAction(
   '[Animal] Delete Animal',
   props<{animal: Animal}>()
 );
 
-export const DeleteAnimalSuccess = createAction(
+export const AnimalDeletedSuccess = createAction(
   '[Animals] Animal Deleted',
   props<{animal: Animal}>()
 );
-
-export const DeleteAnimalFailure = createAction(
-  '[Animals] Animal Delete Failed',
-  props<{animal: Animal}>()
-  );

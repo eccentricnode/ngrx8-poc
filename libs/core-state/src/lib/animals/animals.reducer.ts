@@ -2,26 +2,21 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as AnimalsActions from './animals.actions';
-import { AnimalsEntity } from './animals.models';
+import { Animal } from '@ngrx8-poc/core-data';
 
 export const ANIMALS_FEATURE_KEY = 'animals';
 
-export interface State extends EntityState<AnimalsEntity> {
-  selectedId?: string | number; // which Animals record has been selected
+export interface AnimalsState extends EntityState<Animal> {
+  selectedAnimalId?: string | number; // which Animals record has been selected
   loaded: boolean; // has the Animals list been loaded
   error?: string | null; // last none error (if any)
 }
 
-export interface AnimalsPartialState {
-  readonly [ANIMALS_FEATURE_KEY]: State;
-}
+export const animalsAdapter: EntityAdapter<Animal> = createEntityAdapter<Animal>();
 
-export const animalsAdapter: EntityAdapter<AnimalsEntity> = createEntityAdapter<
-  AnimalsEntity
->();
-
-export const initialState: State = animalsAdapter.getInitialState({
+export const initialState: AnimalsState = animalsAdapter.getInitialState({
   // set initial required properties
+  selectedAnimalId: null,
   loaded: false
 });
 
@@ -32,15 +27,37 @@ const animalsReducer = createReducer(
     loaded: false,
     error: null
   })),
-  on(AnimalsActions.loadAnimalsSuccess, (state, { animals }) =>
+  on(AnimalsActions.AnimalsLoadedSuccess, (state, { animals }) =>
     animalsAdapter.addAll(animals, { ...state, loaded: true })
   ),
-  on(AnimalsActions.loadAnimalsFailure, (state, { error }) => ({
-    ...state,
-    error
-  }))
+  on(AnimalsActions.AnimalSelected, (state, { animalId }) => 
+    Object.assign({}, state, { selectedAnimalId: animalId })
+  ),
+  on(AnimalsActions.AnimalCreationSuccess,
+    (state, { animal }) => 
+    animalsAdapter.addOne(animal, state)
+  ),
+  on(AnimalsActions.AnimalUpdatedSuccess,
+    (state, { animal }) => 
+    animalsAdapter.upsertOne(animal, state)  
+  ),
+  on(AnimalsActions.AnimalDeletedSuccess, 
+    (state, { animal }) =>
+    animalsAdapter.removeOne(animal.id, state)
+  )
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: AnimalsState | undefined, action: Action) {
   return animalsReducer(state, action);
 }
+
+export const getSelectedAnimalId = (state: AnimalsState) => state.selectedAnimalId;
+
+// get the selectors
+
+export const {
+  selectIds: selectAnimalIds,
+  selectEntities: selectAnimalEntities,
+  selectAll: selectAllAnimals,
+  selectTotal: selectAnimalTotal
+} = animalsAdapter.getSelectors();

@@ -16,9 +16,6 @@ export class AnimalsEffects {
         this.animalsService.all().pipe(
           map((animals: Animal[]) => 
             AnimalsActions.AnimalsLoadedSuccess({ animals })
-          ),
-          catchError(error =>
-            of(AnimalsActions.AnimalsLoadedFailure({ error }))
           )
         )
       )
@@ -30,8 +27,7 @@ export class AnimalsEffects {
       ofType(AnimalsActions.CreateAnimal),
       mergeMap(({ animal }) =>
         this.animalsService.create([animal]).pipe(
-          map(() => AnimalsActions.AnimalCreationSuccess({ animal })),
-          catchError(() => of(AnimalsActions.AnimalCreationFailure({ animal })))
+          map(() => AnimalsActions.AnimalCreationSuccess({ animal }))
         )
       )
     )
@@ -42,8 +38,7 @@ export class AnimalsEffects {
       ofType(AnimalsActions.UpdateAnimal),
       mergeMap(({ animal }) =>
         this.animalsService.update([animal]).pipe(
-          map(() => AnimalsActions.AnimalUpdatedSuccess({ animal })),
-          catchError(() => of(AnimalsActions.AnimalUpdatedFailure( { animal })))
+          map(() => AnimalsActions.AnimalUpdatedSuccess({ animal }))
         )
       )
     )
@@ -54,8 +49,7 @@ export class AnimalsEffects {
       ofType(AnimalsActions.DeleteAnimal),
       mergeMap(({ animal }) =>
         this.animalsService.delete([animal.id]).pipe(
-          map(() => AnimalsActions.DeleteAnimalSuccess({ animal })),
-          catchError(() => of(AnimalsActions.DeleteAnimalFailure({ animal })))
+          map(() => AnimalsActions.AnimalDeletedSuccess({ animal }))
         )
       )
     )
@@ -64,5 +58,5 @@ export class AnimalsEffects {
   constructor(
     private actions$: Actions,
     private animalsService: AnimalsService
-  ) {}
+  ) { }
 }
