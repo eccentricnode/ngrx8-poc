@@ -25,7 +25,10 @@
               "apps/dashboard/src/favicon.ico",
               "apps/dashboard/src/assets"
             ],
-            "styles": ["apps/dashboard/src/styles.scss"],
+            "styles": [
+              "apps/dashboard/src/styles.scss",
+              "apps/dashboard/src/_custom-theme.scss"
+            ],
             "scripts": []
           },
           "configurations": {

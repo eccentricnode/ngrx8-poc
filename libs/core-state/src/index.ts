@@ -1,5 +1,3 @@
-export * from './lib/animals/animals.actions';
-export * from './lib/animals/animals.reducer';
-export * from './lib/animals/animals.selectors';
-export * from './lib/animals/animals.models';
-export * from './lib/core-state.module';
+export { CoreStateModule } from './lib/core-state.module';
+
+export { AnimalsFacade } from './lib/animals/animals.facade';

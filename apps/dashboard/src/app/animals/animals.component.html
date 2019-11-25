@@ -1,9 +1,18 @@
 <div class="wrapper">
     <div class="list-grid">
-        <ngrx8-poc-animals-list></ngrx8-poc-animals-list>
+        <ngrx8-poc-animals-list
+            [animals]="animals$ | async"
+            (selected)="selectAnimal($event)"
+            (deleted)="removeAnimal($event)">
+        </ngrx8-poc-animals-list>
     </div>
 
     <div class="details-grid">
-        <ngrx8-poc-animal-details></ngrx8-poc-animal-details>
+        <ngrx8-poc-animal-details
+            [group]="form"
+            [animal]="selectedAnimal$ | async"
+            (submitted)="saveAnimal($event)"
+            (cancelled)="reset($event)">
+        </ngrx8-poc-animal-details>
     </div>
 </div>
