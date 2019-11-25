@@ -29,7 +29,7 @@ export const getSelectedId = createSelector(
   (state: AnimalsState) => state.selectedAnimalId
 );
 
-export const getSelected = createSelector(
+export const getSelectedAnimal = createSelector(
   getAnimalsEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
